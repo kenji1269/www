@@ -1,0 +1,38 @@
+.flex {
+    display: flex;
+    align-items: center; /* 縦方向に中央揃え */
+    justify-content: space-between; /* 写真と文字の間に適切なスペースを確保 */
+}
+
+.flex .img {
+    width: 50%; /* 写真がコンテナの50%の幅を占める */
+    overflow: hidden; /* 写真がコンテナを超えないようにする */
+}
+
+.flex .img img {
+    width: 100%; /* 写真がコンテナの幅いっぱいになるようにする */
+    height: auto; /* アスペクト比を維持 */
+}
+
+.flex .text {
+    width: 50%; /* テキストがコンテナの50%の幅を占める */
+    margin: 0;
+    padding: 0 10px; /* テキストの周りに余白を追加 */
+    box-sizing: border-box; /* パディングが幅に影響しないようにする */
+    text-align: left; /* テキストを左揃えにする */
+}
+.flex_2 {
+    display: flex;
+    align-items: center; /* 縦方向に中央揃え */
+    justify-content: space-between; /* 写真と文字の間に適切なスペースを確保 */
+}
+
+.flex_2 .img_2 {
+    width: 50%; /* 写真がコンテナの50%の幅を占める */
+    overflow: hidden; /* 写真がコンテナを超えないようにする */
+}
+
+.flex_2 .img_2 img {
+    width: 100%; /* 写真がコンテナの幅いっぱいになるようにする */
+    height: auto; /* アスペクト比を維持 */
+}

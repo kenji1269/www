@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>場所情報表示プログラム</title>
+
+  <!-- CSSファイルのリンク -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>場所情報表示プログラム</h1>
+
+  <!-- 出発点と到着点の選択エリア -->
+  <div id="area">
+    <div id="area_s">
+      <label for="departure">出発点を選んでください：</label>
+      <select id="departure">
+        <option value="">選択してください</option>
+        <option value="start1">八王子駅行き</option>
+        <option value="start2">八王子駅南行き</option>
+        <option value="start2">駐輪場</option>
+      </select>
+    </div>
+
+    <div id="area_f">
+      <label for="destination">行き先を選んでください：</label>
+      <select id="destination">
+        <option value="">選択してください</option>
+        　<option value="KenkyuA">研究棟A</option>
+          <option value="KenkyuB">研究棟B</option>
+          <option value="KenkyuC">研究棟C</option>
+          <option value="KogiA">講義棟A</option>
+          <option value="KogiB">講義棟B</option>
+          <option value="KogiC">講義棟C</option>
+          <option value="KogiD">講義棟D</option>
+          <option value="KogiE">講義棟E</option>
+          <option value="Kogijikken">講義実験棟</option>
+        　<option value="Toshokan">図書館棟</option>
+          <option value="Kousei">厚生棟</option>
+          <option value="Kenkyujo">研究所棟</option>
+          <option value="Honbuto">本部棟</option>
+          <option value="Foodsfuu">フーズフー</option>
+          <option value="Bijutsukan">美術館</option>
+          <option value="JikkentoA">実験棟A</option>
+          <option value="JikkentoB">実験棟B</option>
+          <option value="Media">メディアホール</option>
+          <option value="Cafe">カフェテリア棟</option>
+          <option value="Katayanagikinen">片柳記念ホール</option>
+          <option value="taiikukan">体育館</option>
+          <option value="Tennis">テニスコート</option>
+          <option value="Rikujo">陸上競技場</option>
+        
+      </select>
+    </div>
+  </div>
+
+  <!-- 情報表示エリア -->
+  <div id="info_area">
+    <div class="info-section">
+      <h3>出発点の情報</h3>
+      <div id="departure_info" class="info-content">
+        
+  
+      
+        <!-- 出発点の詳細リンク -->
+        <p><a id="departure_link" href="info/hachioji.html" target="_blank">出発点の詳細はこちら</a></p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3>行き先の情報</h3>
+      <div id="destination_info" class="info-content">
+      
+        
+        <!-- 行き先の詳細リンク -->
+        <p><a id="destination_link" href="info/bijutsukan.html" target="_blank">行き先の詳細はこちら</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScriptファイルのリンク -->
+  <script src="hyouji_script.js"></script>
+</body>
+</html>

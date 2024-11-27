@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>場所情報表示プログラム</title>
+
+  <!-- CSSファイルのリンク -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>場所情報表示プログラム</h1>
+
+  <!-- 出発点と到着点の選択エリア -->
+  <div id="area">
+    <div id="area_s">
+      <label for="departure">出発点を選んでください：</label>
+      <select id="departure">
+        <option value="">選択してください</option>
+        <option value="start1">スタートポイント1</option>
+        <option value="start2">スタートポイント2</option>
+      </select>
+    </div>
+
+    <div id="area_f">
+      <label for="destination">到着点を選んでください：</label>
+      <select id="destination">
+        <option value="">選択してください</option>
+        <option value="end1">エンドポイント1</option>
+        <option value="end2">エンドポイント2</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 情報表示エリア -->
+  <div id="info_area">
+    <div class="info-section">
+      <h3>出発点の情報</h3>
+      <div id="departure_info" class="info-content">
+        <p>出発点を選択してください。</p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3>到着点の情報</h3>
+      <div id="destination_info" class="info-content">
+        <p>到着点を選択してください。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScriptファイルのリンク -->
+  <script src="hyouji_script.js"></script>
+</body>
+</html>

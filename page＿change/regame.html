@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学校マップ画面</title>
+    <link rel="stylesheet" href="regame.css">
+</head>
+<body>
+
+    <h1 id="title">現在地<br>↓<br>目的地</h1>
+    <img id="mapImage" src="" alt="地図" class="map">
+
+    <!-- 情報表示 -->
+    <div class="info-box">
+        <div class="info-item">何m: <span id="distance">200</span></div>
+        <div class="info-item">何分: <span id="time">5</span></div>
+    </div>
+
+    <!-- ボタン -->
+    <button class="button" onclick="move()">進む</button>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const departure = urlParams.get('departure');
+          const destination = urlParams.get('destination');
+          const departureNumber = urlParams.get('departureNumber');
+          const destinationNumber = urlParams.get('destinationNumber');
+          const total = urlParams.get('total');
+          console.log(`Departure: ${departure}`);
+        console.log(`Destination: ${destination}`);
+        console.log(`Departure Number: ${departureNumber}`);
+        console.log(`Destination Number: ${destinationNumber}`);
+        });
+        // デバッグ用にURLパラメータをコンソールに出力
+        
+        // データ配列（キーに基づいて文字と画像を管理）
+        const locationData = {
+            103: {
+                name: "八王子",
+                image: "改改八王子から本部棟.png" // 必ず画像ファイル名を置き換える
+            }
+        };
+
+        // URLパラメータを取得
+        const params = new URLSearchParams(window.location.search);
+        const current = params.get('current'); // 現在地
+        const destination = params.get('destination'); // 目的地
+
+        // 現在地または目的地のデータを取得して動的に変更
+        const title = document.getElementById('title');
+        const mapImage = document.getElementById('mapImage');
+
+        // 現在地または目的地が存在する場合に切り替え
+        if (locationData[current]) {
+            title.textContent = `現在地: ${locationData[current].name}`;
+            mapImage.src = locationData[current].image;
+        } else if (locationData[destination]) {
+            title.textContent = `目的地: ${locationData[destination].name}`;
+        } else {
+            title.textContent = "現在地または目的地が設定されていません";
+            mapImage.src = "デフォルト画像.png"; // 画像がない場合の代替画像
+        }
+    </script>
+</body>
+</html>

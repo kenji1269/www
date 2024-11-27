@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>場所情報表示プログラム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>場所情報表示プログラム</h1>
+
+    <!-- 出発点を決めるためのセレクトボックス -->
+    <div id="area">
+        <div id="area_s">
+            <p>
+                <label for="area_s">出発点</label><br>
+                <select id="area_s" name="s-area" onchange="loadInfo('departure', this.value)">
+                    <option value="">出発点を選択してください</option>
+                    <option value="hachioji">八王子駅行き</option>
+                    <option value="hachiojinorth">八王子みなみ野駅行き</option>
+                    <option value="Churinjo">駐輪場</option>
+                </select>
+            </p>
+        </div>
+        
+        <!-- 行き先を決めるためのセレクトボックス -->
+        <div id="area_f">
+            <p>
+                <label for="area_f">行き先</label><br>
+                <select id="area_f" name="f-area" onchange="loadInfo('destination', this.value)">
+                    <option value="">行き先を選択してください</option>
+                    <option value="KenkyuA">研究棟A</option>
+                    <option value="KenkyuB">研究棟B</option>
+                    <option value="KenkyuC">研究棟C</option>
+                    <option value="KogiA">講義棟A</option>
+                    <option value="KogiB">講義棟B</option>
+                    <option value="KogiC">講義棟C</option>
+                    <option value="KogiD">講義棟D</option>
+                    <option value="KogiE">講義棟E</option>
+                    <option value="Kogijikken">講義実験棟</option>
+                    <option value="Toshokan">図書館棟</option>
+                    <option value="Kousei">厚生棟</option>
+                    <option value="Kenkyujo">研究所棟</option>
+                    <option value="Honbuto">本部棟</option>
+                    <option value="Foodsfuu">フーズフー</option>
+                    <option value="Bijutsukan">美術館</option>
+                    <option value="JikkentoA">実験棟A</option>
+                    <option value="JikkentoB">実験棟B</option>
+                    <option value="Media">メディアホール</option>
+                    <option value="Cafe">カフェテリア棟</option>
+                    <option value="Katayanagikinen">片柳記念ホール</option>
+                    <option value="taiikukan">体育館</option>
+                    <option value="Tennis">テニスコート</option>
+                    <option value="Rikujo">陸上競技場</option>
+                </select>
+            </p>
+        </div>
+    </div>
+
+    <!-- 情報表示エリア -->
+    <div id="info_area">
+        <div class="info-section">
+            <h3>出発点の情報</h3>
+            <div id="departure_info" class="info-content">
+                <p>出発点を選択してください。</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>到着点の情報</h3>
+            <div id="destination_info" class="info-content">
+                <p>到着点を選択してください。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

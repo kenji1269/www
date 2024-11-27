@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スクールムーブアドベンチャー</title>
+  <!-- <script src="map.js" defer></script> -->
+  
+  <!-- インラインCSS -->
+  <style>
+    /* リセットスタイル */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      overflow-y: auto; /* ページの縦スクロールを有効に */
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #area {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 800px;
+      justify-content: center;
+    }
+
+    #area_s, #area_f {
+      width: 200px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+
+    /* 情報表示エリア */
+    #info_area {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+      flex-wrap: wrap;
+    }
+
+    .info-section {
+      background-color: #fff;
+      padding: 20px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .info-section h3 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .info-content {
+      min-height: 150px;
+      overflow: auto;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .info-content.loaded {
+      opacity: 1;
+    }
+
+    .info-content p {
+      text-align: center;
+      color: #666;
+    }
+
+    #start-game-container {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #start-game-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      display: none; /* 初期状態で非表示 */
+    }
+    
+    /* レスポンシブデザイン */
+    @media (max-width: 768px) {
+      #area {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #area_s, #area_f {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .info-section {
+        max-width: 450px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #info_area {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .info-section {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>日本工学院八王子専門学校</h1>
+
+  <!-- 出発点と到着点の選択エリア -->
+  <div id="area">
+    <div id="area_s">
+      <label for="departure">出発点を選んでください：</label>
+      <select id="departure">
+        <option value="">選択してください</option>
+        <option value="start1">八王子駅行き</option>
+        <option value="start2">八王子駅南行き</option>
+        <option value="start3">駐輪場</option>
+      </select>
+    </div>
+
+    <div id="area_f">
+      <label for="destination">行き先を選んでください：</label>
+      <select id="destination">
+        <option value="">選択してください</option>
+        <option value="KenkyuA">研究棟A</option>
+        <option value="KenkyuB">研究棟B</option>
+        <option value="KenkyuC">研究棟C</option>
+        <option value="KogiA">講義棟A</option>
+        <option value="KogiB">講義棟B</option>
+        <option value="KogiC">講義棟C</option>
+        <option value="KogiD">講義棟D</option>
+        <option value="KogiE">講義棟E</option>
+        <option value="Kogijikken">講義実験棟</option>
+        <option value="Toshokan">図書館棟</option>
+        <option value="Kousei">厚生棟</option>
+        <option value="Kenkyujo">研究所棟</option>
+        <option value="Honbuto" data-coords="1157,837,9">本部棟</option>
+        <option value="Foodsfuu">フーズフー</option>
+        <option value="Bijutsukan">美術館</option>
+        <option value="JikkentoA">実験棟A</option>
+        <option value="JikkentoB">実験棟B</option>
+        <option value="Media">メディアホール</option>
+        <option value="Cafe">カフェテリア棟</option>
+        <option value="Katayanagikinen">片柳記念ホール</option>
+        <option value="taiikukan">体育館</option>
+        <option value="Tennis">テニスコート</option>
+        <option value="Rikujo">陸上競技場</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 情報表示エリア -->
+  <div id="info_area">
+    <div class="info-section">
+      <h3>出発点の情報</h3>
+      <div id="departure_info" class="info-content">
+        <p>出発点を選択してください。</p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3>行先の情報</h3>
+      <div id="destination_info" class="info-content">
+        <p>行先点を選択してください。</p>
+      </div>
+    </div>
+  </div>
+  
+ <div id="start-game-container">
+  <button id="startGameButton" onclick="startGame()">ゲーム開始</button>
+  
+</div>
+
+  <script>
+
+    
+document.addEventListener("DOMContentLoaded", () => {
+      // 出発点の選択処理
+      const departureSelect = document.getElementById("departure");
+      const departureInfo = document.getElementById("departure_info");
+  
+      // 出発点のデータ
+      const departureData = {
+        start1: { number:100,content: "八王子駅行きのイメージ", image: "images/八王子駅行.jpg", link: "info/hachioji.html"},
+        start2: { number:200,content: "八王子南駅のイメージ", image: "images/八王子南の駅.jpg", link: "info/hachiojinorth.html" },
+        start3: { number:300,content: "駐輪場のイメージ", image: "images/駐車場.jpg", link: "info/churinjo.html" }
+      };
+
+      departureSelect.addEventListener("change", () => {
+        const selectedValue = departureSelect.value;
+        if (selectedValue === "") {
+          departureInfo.innerHTML = "<p>出発点を選択してください。</p>";
+          departureInfo.classList.remove("loaded");
+          return;
+        }
+  
+        // 選択した行先に関連するデータを取得して表示
+        const selectedData = departureData[selectedValue];
+        if (selectedData) {
+          departureInfo.innerHTML = `
+            <p>${selectedData.content}</p>
+            <img src="${selectedData.image}" alt="${selectedValue}の画像" style="max-width: 100%;">
+            <p><a href="${selectedData.link}" target="_blank">詳細を見る</a></p>
+          `;
+          departureInfo.classList.add("loaded");
+        }
+      });
+  
+      // 行き先の選択処理
+      const destinationSelect = document.getElementById("destination");
+      const destinationInfo = document.getElementById("destination_info");
+  
+      
+      // 行き先のデータ
+      const destinationData = {
+        KenkyuA: { number:7,content: "研究棟Aのイメージ", image: "info/研究棟A.jpg", link: "info/kenkyuA.html",coords:"1307,592,9" },
+        KenkyuB: { number:8,content: "研究棟Bのイメージ", image: "images/研究棟B.jpg", link: "info/kenkyuB.html",coords:"960,340,9" },
+        KenkyuC: { number:9,content: "研究棟Cのイメージ", image: "images/研究棟C.jpg", link: "info/kenkyuC.html",coords:"835,146,9" },
+        KogiA:   { number:10,content: "講義棟Aのイメージ",image: "images/講義棟A.jpg", link: "info/kogiA.html",coords:"816,386,9"},
+        KogiB: {  number:11,content: "講義棟Bのイメージ", image: "images/講義棟B.jpg",link: "info/kogiB.html",coords:"1025,355,9"},
+        KogiC: {  number:12,content: "講義棟Cのイメージ",image: "images/講義棟C.jpg",link: "info/kogiC.html",coords:"1027,278,9"},
+        KogiD: {  number:13,content: "講義棟Dのイメージ",image: "images/講義棟D.jpg",link: "info/kogiD.html",coords:"899,226,9"},
+        KogiE: {  number:14,content: "講義棟Eのイメージ",image: "images/講義棟E.jpg",link: "info/kogiE.html",coords:"939,226,9"},
+        Kogijikken: {  number:15,content: "講義実験のイメージ",image: "images/講義実験棟.jpg",  link: "info/kogijikken.html"},
+        Toshokan: { number:6,content: "図書館のイメージ",image: "images/図書館棟.jpg",link: "info/toshokan.html"},
+        Kousei: {number:5,content: "厚生棟のイメージ",
+          image: "images/厚生棟.jpg",
+          link: "info/kousei.html"
+        },
+        Kenkyujo: {
+          number:0,
+          content: "研究所棟のイメージ",
+          image: "images/研究所棟.jpg",
+          link: "info/kenkyujo.html"
+        },
+        Honbuto: {
+          number:3,
+          content: "本部棟のイメージ",
+          image: "images/本部棟.jpg",
+          link: "info/honbuto.html"
+        },
+        Foodsfuu: {
+          number:2,
+          content: "FOODS FUUのイメージ",
+          image: "images/FOODS FUU.jpg",
+          link: "info/foodsfuu.html"
+        },
+        Bijutsukan: {
+          number:4,
+          content: "美術館のイメージ",
+          image: "images/美術館2.jpg",
+          link: "info/bijutsukan.html"
+        },
+        JikkentoA: {
+          number:16,
+          content: "実験棟Aのイメージ",
+          image: "images/実験棟A.jpg",
+          link: "info/jikkentoA.html"
+        },
+        JikkentoB: {
+          number:17,
+          content: "実験棟Bのイメージ",
+          image: "images/実験棟B.jpg",
+          link: "info/jikkentoB.html"
+        },
+        Media: {
+          number:18,
+          content: "メディアホールのイメージ",
+          image: "images/メディアホール.jpg",
+          link: "info/media.html"
+        },
+        Cafe: {
+          number:22,
+          content: "カフェテリア棟のイメージ",
+          image: "images/マクドナルド.jpg",
+          link: "info/cafe.html"
+        },
+        Katayanagikinen: {
+          number:19,
+          content: "片柳記念ホールのイメージ",
+          image: "images/片柳記念ホール.jpg",
+          link: "info/katayanagikinen.html"
+        },
+        taiikukan: {
+          number:20,
+          content: "体育館のイメージ",
+          image: "images/体育館.jpg",
+          link: "info/taiikukan.html"
+        },
+        Tennis: {
+          number:23,
+          content: "テニスコートのイメージ",
+          image: "images/テニスコート.jpg",
+          link: "info/tennis.html"
+        },
+        Rikujo: {
+          number:21,
+          content: "陸上競技場のイメージ",
+          image: "images/陸上トラック.jpg",
+          link: "info/rikujo.html"
+        },
+      };
+     
+      
+      destinationSelect.addEventListener("change", () => {
+        const selectedValue = destinationSelect.value;
+        if (selectedValue === "") {
+          destinationInfo.innerHTML = "<p>行き先を選択してください。</p>";
+          destinationInfo.classList.remove("loaded");
+          return;
+        }
+  
+        // 選択した到着点に関連するデータを取得して表示
+        const selectedData = destinationData[selectedValue];
+        if (selectedData) {
+          destinationInfo.innerHTML = `
+            <p>${selectedData.content}</p>
+            <img src="${selectedData.image}" alt="${selectedValue}の画像" style="max-width: 100%;">
+            <p><a href="${selectedData.link}" target="_blank">詳細を見る</a></p>
+          `;
+          destinationInfo.classList.add("loaded");
+        }
+      });
+    
+     
+     // ゲーム開始関数
+
+    const startGameButton = document.getElementById("startGameButton");
+
+    function startGame() {
+    const departureValue = departureSelect.value;
+    const destinationValue = destinationSelect.value;
+
+    if (departureValue && destinationValue) {
+      const departureInfo = departureData[departureValue];
+      const destinationInfo = destinationData[destinationValue];
+      const totalNumber = (departureInfo.number || 0) + (destinationInfo.number || 0);
+
+      const url = `regame.html?departure=${encodeURIComponent(departureInfo.name)}&destination=${encodeURIComponent(destinationInfo.name)}&departureNumber=${departureInfo.number}&destinationNumber=${destinationInfo.number}&total=${totalNumber}`;
+      window.location.href = url;
+    } else {
+      alert("出発点と行き先を選択してください。");
+    }
+  }
+
+  function checkSelection() {
+    startGameButton.style.display = (departureSelect.value && destinationSelect.value) ? "block" : "none";
+  }
+
+  departureSelect.addEventListener("change", checkSelection);
+  destinationSelect.addEventListener("change", checkSelection);
+  startGameButton.addEventListener("click", startGame);
+  startGameButton.style.display = "none";
+});
+
+  </script>
+</body>
+</html>

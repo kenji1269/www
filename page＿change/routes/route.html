@@ -1,0 +1,97 @@
+<!-- route.html (ルート画像を表示するページ) -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="route.css">
+
+
+  <title>ルート画像を表示するページ</title>
+</head>
+<body>
+  <h1>八王子駅<br>↓<br>本部棟</h1>
+  <img src="改改八王子から本部棟.png" alt="八王子駅から本部棟" style="max-width: 100%;">
+  <div class="undermap">
+    <div class="meter">
+      <img src="歩く人.png" alt="歩く人">
+      <p>何m</p>
+    </div>
+    <div class="minutes">
+      <img src="時計.png" alt="時計">
+      <p>何分</p>
+    </div>
+    <div>
+      <button type="submit" class="go">進む</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+<!--一回無視-->
+  <!-- <h1 id="routeTitle"></h1> -->
+
+  <!-- <div id="routeImage"></div> // ルート画像が表示される場所 
+  <div id="routeInfo"></div> // 番号や合計が表示される場所 
+  <button id="backButton" onclick="goBack()">戻る</button> -->
+
+  <!--  <script>
+    // URLのパラメータを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const departureValue = urlParams.get('departure');
+    const destinationValue = urlParams.get('destination');
+    const departureNumber = parseInt(urlParams.get('departureNumber'));
+    const destinationNumber = parseInt(urlParams.get('destinationNumber'));
+    const totalNumber = departureNumber + destinationNumber; // 番号の合計を計算
+
+    const routeImageContainer = document.getElementById("routeImage");
+    const routeInfoContainer = document.getElementById("routeInfo");
+    
+    // 出発点と行き先の番号を名前に変換するマッピング
+    const locations = {
+      100: "八王子駅",
+      200: "八王子みなみ野駅",
+      300: "駐輪場",
+      1:"研究所棟",2:"フーズフー",
+      3:"本部棟",4:"美術館",
+      5:"厚生棟",6:"図書館棟",
+      7:"研究棟A",8:"研究棟B",
+      9:"研究棟C",10:"講義棟A",
+      11:"講義棟B",12:"講義棟C",
+      13:"講義棟D",14:"講義棟E",
+      15:"講義実験棟",16:"実験棟A",
+      17:"実験棟B",18:"メディアホール",
+      19:"片柳記念ホール",20:"体育館",
+      21:"陸上競技場",22:"カフェテリア棟",
+    };
+      // 出発点と行き先の名前を取得
+  const departureName = locations[departureNumber];
+  const destinationName = locations[destinationNumber];
+    
+    // 出発点と行き先の名前を確認
+  if (departureName && destinationName) {
+    // タイトルを変更
+    //routeTitle.textContent  = `出発点:<span class="departure"> ${departureName}</span> → 行き先:<span class="destination">${destinationName}</span>`;
+    routeTitle.innerHTML = `出発点: <span class="departure">${departureName}</span> → 行き先: <span class="destination">${destinationName}</span>`;
+
+    const imagePath = `${departureNumber}/route_${totalNumber}.png`;
+    routeImageContainer.innerHTML = `<img src="${imagePath}" alt="選択されたルート" style="max-width: 100%;">`;
+
+  } else {
+    // エラーメッセージを表示
+    routeTitle.textContent = "ルート情報が見つかりません"; // h1にエラーメッセージ
+    routeImageContainer.innerHTML = `<p>画像が見つかりません。URLパラメータを確認してください。</p>`;
+  }
+  function goBack() {
+      window.history.back(); // 前のページに戻る
+    }
+  </script>  -->
+
+</body>
+</html>

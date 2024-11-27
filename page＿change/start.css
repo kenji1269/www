@@ -1,0 +1,60 @@
+
+h1 {
+    font-family:'Times New Roman', Times, serif;
+}
+p {
+    font-family: monospace;
+}
+/* 映像をフルスクリーンに設定 */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* 画面の全高さにフィット */
+    overflow: hidden;
+}
+
+#start-video {
+    width: 100%;
+    height: 100vh; /* 画面全体に映像を表示 */
+    object-fit: cover; /* 映像をコンテナに収める */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 映像上に文字やボタンを配置 */
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+/* タイトルのフォントサイズ調整 */
+.overlay h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* 説明テキストのフォントサイズ調整 */
+.overlay p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+/* ボタンのデザイン */
+.s_btn {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.s_btn:hover {
+    background-color: #0056b3;
+}

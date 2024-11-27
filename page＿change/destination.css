@@ -1,0 +1,54 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #F0FFF0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .departure-info {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #FFFFE0;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  select {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  .button-container {
+    margin-top: 20px;
+  }
+
+  .next-button {
+    background-color: #32CD32;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .next-button:hover {
+    background-color: #2E8B57;
+  }

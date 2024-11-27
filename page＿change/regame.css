@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* 表示サイズを制限 */
+    margin: 0 auto;
+}
+
+.map {
+    display: block;
+    width: 100%;
+}
+
+.marker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.marker.red {
+    background-color: red;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+}
+
+.marker.blue {
+    background-color: blue;
+    top: 65%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+}
+
+.info-box {
+    margin-top: 20px;
+}
+
+.info-item {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: gray;
+}

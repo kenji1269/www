@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="common.js" defer></script>
+  <title>行き先を選択</title>
+  <link rel="stylesheet" href="destination.css">
+</head>
+<body>
+  <h1>行き先を選んでください</h1>
+  <form id="destinationForm" action="routes/route.html" method="GET">
+    <input type="hidden" id="departure" name="departure">
+    <label for="destination">行き先:</label>
+    <select id="destination" name="destination" required>
+      <option value="">選択してください</option>
+      <option value="KenkyuA">研究棟A</option>
+      <option value="KenkyuB">研究棟B</option>
+      <option value="KenkyuC">研究棟C</option>
+      <option value="KogiA">講義棟A</option>
+      <option value="KogiB">講義棟B</option>
+      <option value="KogiC">講義棟C</option>
+      <option value="KogiD">講義棟D</option>
+      <option value="KogiE">講義棟E</option>
+      <option value="Kogijikken">講義実験棟</option>
+      <option value="Toshokan">図書館棟</option>
+      <option value="Kousei">厚生棟</option>
+      <option value="Kenkyujo">研究所棟</option>
+      <option value="Honbuto" data-coords="1157,837,9">本部棟</option>
+      <option value="Foodsfuu">フーズフー</option>
+      <option value="Bijutsukan">美術館</option>
+      <option value="JikkentoA">実験棟A</option>
+      <option value="JikkentoB">実験棟B</option>
+      <option value="Media">メディアホール</option>
+      <option value="Cafe">カフェテリア棟</option>
+      <option value="Katayanagikinen">片柳記念ホール</option>
+      <option value="taiikukan">体育館</option>
+      <option value="Tennis">テニスコート</option>
+      <option value="Rikujo">陸上競技場</option>
+      <!-- 他のオプション -->
+    </select>
+    <div id="destination_info">
+      出発点: <span id="selectedDeparture">行き先を選択してください</span>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="next-button">次へ</button>
+    </div>
+  </form>
+
+ 
+<script>
+   document.addEventListener("DOMContentLoaded", () =>{
+    const destinationData = {
+    KenkyuA: { number:7,content: "研究棟Aのイメージ", image: "info/研究棟A.jpg", link: "info/kenkyuA.html",coords:"1307,592,9" },
+        KenkyuB: { number:8,content: "研究棟Bのイメージ", image: "images/研究棟B.jpg", link: "info/kenkyuB.html",coords:"960,340,9" },
+        KenkyuC: { number:9,content: "研究棟Cのイメージ", image: "images/研究棟C.jpg", link: "info/kenkyuC.html",coords:"835,146,9" },
+        KogiA:   { number:10,content: "講義棟Aのイメージ",image: "images/講義棟A.jpg", link: "info/kogiA.html",coords:"816,386,9"},
+        KogiB: {  number:11,content: "講義棟Bのイメージ", image: "images/講義棟B.jpg",link: "info/kogiB.html",coords:"1025,355,9"},
+        KogiC: {  number:12,content: "講義棟Cのイメージ",image: "images/講義棟C.jpg",link: "info/kogiC.html",coords:"1027,278,9"},
+        KogiD: {  number:13,content: "講義棟Dのイメージ",image: "images/講義棟D.jpg",link: "info/kogiD.html",coords:"899,226,9"},
+        KogiE: {  number:14,content: "講義棟Eのイメージ",image: "images/講義棟E.jpg",link: "info/kogiE.html",coords:"939,226,9"},
+        Kogijikken: {  number:15,content: "講義実験のイメージ",image: "images/講義実験棟.jpg",  link: "info/kogijikken.html",coords:"731,235,847,276"},
+        Toshokan: { number:6,content: "図書館のイメージ",image: "images/図書館棟.jpg",link: "info/toshokan.html"},
+        Kousei: {number:5,content: "厚生棟のイメージ",image: "images/厚生棟.jpg",link: "info/kousei.html"},
+        Kenkyujo: {number:1,content: "研究所棟のイメージ",image: "images/研究所棟.jpg",link: "info/kenkyujo.html",coords:"797,888,1093,1022"},
+        Honbuto: {number:3,content: "本部棟のイメージ",image: "images/本部棟.jpg",link: "info/honbuto.html"},
+        Foodsfuu: {number:2,content: "FOODS FUUのイメージ",image: "images/FOODS FUU.jpg",link: "info/foodsfuu.html"},
+        Bijutsukan: {number:4,content: "美術館のイメージ",image: "images/美術館2.jpg",link: "info/bijutsukan.html"},
+        JikkentoA: {number:16,content: "実験棟Aのイメージ",image: "images/実験棟A.jpg",link: "info/jikkentoA.html"},
+        JikkentoB: {number:17,content: "実験棟Bのイメージ",image: "images/実験棟B.jpg",link: "info/jikkentoB.html"},
+        Media: {number:18,content: "メディアホールのイメージ",image: "images/メディアホール.jpg",link: "info/media.html"},
+        Cafe: {number:22,content: "カフェテリア棟のイメージ",image: "images/マクドナルド.jpg",link: "info/cafe.html"},
+        Katayanagikinen: {number:19,content: "片柳記念ホールのイメージ",image: "images/片柳記念ホール.jpg",link: "info/katayanagikinen.html"},
+        taiikukan: {number:20,content: "体育館のイメージ",image: "images/体育館.jpg",link: "info/taiikukan.html"},
+        Tennis: {number:23,content: "テニスコートのイメージ",image: "images/テニスコート.jpg",link: "info/tennis.html"},
+        Rikujo: {number:21,content: "陸上競技場のイメージ",image: "images/陸上トラック.jpg",link: "info/rikujo.html"},
+   };
+   
+    setupDestinationPage(destinationData);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const departureValue = urlParams.get("departure");
+    const departureNumber = urlParams.get("departure_number");
+    const departureInput = document.getElementById("departure");
+    const departureNumberInput = document.getElementById("departure_number");
+    const destinationSelect = document.getElementById("destination_select");
+
+    // 出発点の情報と番号を隠しフィールドに設定
+    if (departureValue && departureNumber) {
+      departureInput.value = departureValue;
+      departureNumberInput.value = departureNumber;
+    }
+
+    // 行き先選択時にその情報と番号を隠しフィールドに設定
+    destinationSelect.addEventListener("change", () => {
+      const selectedDestination = destinationSelect.value;
+      const selectedDestinationNumber = destinationSelect.options[destinationSelect.selectedIndex].getAttribute("data-number");
+
+      document.getElementById("destination").value = selectedDestination;
+      document.getElementById("destination_number").value = selectedDestinationNumber;
+    });
+});
+</script>
+<script src="common.js"></script>
+</body>
+</html>

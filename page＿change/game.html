@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="styles.css">
+    <script src="imageMapResizer.min.js"></script>
+    <script src="map.js" defer></script>
+    <!-- <script src="dice.js" defer></script> -->
+    <title>school dice</title>
+</head>
+<body>
+    <!-- 学校のマップを画面の横幅いっぱいに表示、イメージマップ-->
+    <div id="map-container" style="position: relative;">
+        <img id="map" src="map.png" usemap="#image-map">  
+        <div id="highlight-circle-start"></div> <!-- 出発点のハイライト用円 -->
+        <div id="highlight-circle-end"></div> <!-- 行き先のハイライト用円 -->
+        <div id="character" style="position: absolute; width: 20px; height: 20px; background-color: transparent; border: 2px solid black;"></div>
+    </div>
+    <map name="image-map">
+        <area id="dynamic-area" shape="circle" coords="0,0,0" href="#" alt="動的エリア">
+        <!-- イメージマップの中をクリックしたら現れるようにする場所  -->
+        <area shape="rect" coords="989,443,1106,526" href="setsumei/toshokan.html" alt="図書館棟">
+        <area shape="rect" coords="744,452,861,535" href="setsumei/kousei.html" alt="厚生棟">
+        <area shape="rect" coords="436,330,635,666" href="setsumei/rikujo.html" alt="陸上競技場">
+        <area shape="rect" coords="848,240,902,401" href="setsumei/kenkyuA.html" alt="研究棟A">
+        <area shape="rect" coords="933,234,992,395" href="setsumei/kenkyuB.html" alt="研究棟B">
+        <area shape="rect" coords="539,104,862,163" href="setsumei/kenkyuC.html" alt="研究棟C">
+        <area shape="rect" coords="667,351,837,392" href="setsumei/kogiA.html" alt="講義棟A">
+        <area shape="rect" coords="1009,337,1197,378" href="setsumei/kogiB.html" alt="講義棟B">
+        <area shape="rect" coords="982,228,1153,269" href="setsumei/kogiC.html" alt="講義棟C">
+        <area shape="rect" coords="844,193,889,240" href="setsumei/kogiD.html" alt="講義棟D">
+        <area shape="rect" coords="940,189,985,236" href="setsumei/kogiE.html" alt="講義棟E">
+        <area shape="rect" coords="731,235,847,276" href="setsumei/kogijikken.html" alt="講義棟実験棟">
+        <area shape="rect" coords="797,888,1093,1022" href="setsumei/kenkyujo.html" alt="研究所棟">
+        <area shape="rect" coords="1101,750,1250,832" href="setsumei/honbuto.html" alt="本部棟">
+        <area shape="rect" coords="664,572,849,644" href="setsumei/foodsfuu.html" alt="FOODS FUU">
+        <area shape="rect" coords="1122,540,1234,612" href="setsumei/bijutsukan.html" alt="美術館">
+        <area shape="rect" coords="552,184,673,256" href="setsumei/jikkentoA.html" alt="実験棟A">
+        <area shape="rect" coords="1157,393,1303,465" href="setsumei/jikkentoB.html" alt="実験棟B">
+        <area shape="rect" coords="1215,276,1306,364" href="setsumei/media.html" alt="メディアホール">
+        <area shape="rect" coords="786,161,832,204" href="setsumei/cafe.html" alt="カフェテリア棟">
+        <area shape="rect" coords="862,101,970,185" href="setsumei/katayanagikinen.html" alt="片柳記念ホール">
+        <area shape="rect" coords="346,113,497,222" href="setsumei/taiikukan.html" alt="体育館">
+        <area shape="rect" coords="272,171,347,325" href="setsumei/tennis.html" alt="テニスコート">
+        <area shape="rect" coords="1088,875,1111,953" href="setsumei/hachioji.html" alt="八王子駅行き">
+        <area shape="rect" coords="690,412,803,459" href="setsumei/hachiojinorth.html" alt="八王子みなみ野駅行き">
+        <area shape="rect" coords="1307,443,1375,592" href="setsumei/churinjo.html" alt="駐輪場">
+    </map> 
+
+    <!-- 出発点を決めるためのところ -->
+    <div id="area">
+        <div id="area_s">
+            <p>
+                <label for="area_s">出発点</label><br>
+                <select id="area_s" name="s-area">
+                    <option value="" data-coords="0,0,0">出発点を選択してください</option>
+                    <option value="hachioji" data-coords="1095,897,9">八王子駅行き</option>
+                    <option value="hachiojinorth" data-coords="818,447,9">八王子みなみ野駅行き</option>
+                    <option value="churinjo" data-coords="1307,592,9">駐輪場</option>
+                </select>
+            </p>
+        </div>
+        
+        <!-- 行き先を決めるところ -->
+        <div id="area_f">
+            <p>
+                <label for="area_f">行き先</label><br>
+                <select id="area_f" name="f-area">
+                    <option value="">行き先を選択してください</option>
+                    <option value="KenkyuA" data-coords="900,341,9">研究棟A</option>
+                    <option value="KenkyuB" data-coords="960,340,9">研究棟B</option>
+                    <option value="KenkyuC" data-coords="835,146,9">研究棟C</option>
+                    <option value="KogiA" data-coords="816,386,9">講義棟A</option>
+                    <option value="KogiB" data-coords="1025,355,9">講義棟B</option>
+                    <option value="KogiC" data-coords="1027,278,9">講義棟C</option>
+                    <option value="KogiD" data-coords="899,226,9">講義棟D</option>
+                    <option value="KogiE" data-coords="939,226,9">講義棟E</option>
+                    <option value="Kogijikken" data-coords="838,289,9">講義実験棟</option>
+                    <option value="Toshokan" data-coords="986,498,9">図書館棟</option>
+                    <option value="Kousei" data-coords="866,495,9">厚生棟</option>
+                    <option value="Kenkyujo" data-coords="948,937,9">研究所棟</option>
+                    <option value="Honbuto" data-coords="1157,837,9">本部棟</option>
+                    <option value="Foodsfuu" data-coords="763,651,9">フーズフー</option>
+                    <option value="Bijutsukan" data-coords="1210,535,9">美術館</option>
+                    <option value="JikkentoA" data-coords="671,270,9">実験棟A</option>
+                    <option value="JikkentoB" data-coords="1177,399,9">実験棟B</option>
+                    <option value="Media" data-coords="1209,319,9">メディアホール</option>
+                    <option value="Cafe" data-coords="827,198,9">カフェテリア棟</option>
+                    <option value="Katayanagikinen" data-coords="917,191,9">片柳記念ホール</option>
+                    <option value="taiikukan" data-coords="506,177,9">体育館</option>
+                    <option value="Tennis" data-coords="506,177,9">テニスコート</option>
+                    <option value="Rikujo" data-coords="527,298,9">陸上競技場</option>
+                </select>
+            </p>
+        </div>
+    </div>
+        
+    <div id="controls">
+        <button id="roll-dice">Roll Dice</button>
+        <button id="reset-game">Reset</button>
+        <img id="dice-image" src="dice_images/dice1.png" alt="Dice" width="50">
+        <p id="dice-result">Dice: 0</p>
+        <p id="player-position">Position: 0</p>
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <button onclick="window.location.href=window.location.href" class="btn">戻る</button>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const departure = urlParams.get('departure');
+          const destination = urlParams.get('destination');
+          const departureNumber = urlParams.get('departureNumber');
+          const destinationNumber = urlParams.get('destinationNumber');
+          const total = urlParams.get('total');
+        
+          // 取得した情報を使って表示や利用を行います
+          console.log("出発点:", departure);
+          console.log("行き先:", destination);
+          console.log("出発点番号:", departureNumber);
+          console.log("行き先番号:", destinationNumber);
+          console.log("合計番号:", total);
+        
+          // 必要に応じて表示用の要素を設定
+          if (departure) {
+            document.querySelector(`#area_s option[value="${departure}"]`).selected = true;
+          }
+          if (destination) {
+            document.querySelector(`#area_f option[value="${destination}"]`).selected = true;
+          }
+        });
+        </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="imageMapResizer.min.js"></script>
+    <!-- <script src="map.js"></script> -->
+    <title>school dice</title>
+    <style>
+        /* body全体のスクロールを無効にする
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        コンテンツが画面外に出てもスクロールされない
+        .content {
+            width: 200%;
+            height: 200%;
+            background-color: lightblue;
+        }*/
+    </style> 
+</head>
+<body>
+        <!-- 学校のマップを画面の横幅いっぱいに表示、イメージマップ-->
+    <img id="map" src="学校ドット絵3.png" usemap="#image-map" width="100%" position="relative";>  
+
+    <map name="image-map">
+        <!-- イメージマップの中をクリックしたら現れるようにする場所 -->
+        <area shape="rect" coords="531,210,642,270" href="toshokan.html" alt="図書館棟">
+        <area shape="rect" coords="331,212,442,272" href="kousei.html" alt="厚生棟">
+        <area shape="rect" coords="118,166,267,379" href="rikujo.html" alt="陸上競技場">
+        <area shape="rect" coords="426,51,464,198" href="kenkyuA.html" alt="研究棟A">
+        <area shape="rect" coords="507,55,545,202" href="kenkyuB.html" alt="研究棟B">
+        <area shape="rect" coords="247,10,436,51" href="kenkyuC.html" alt="研究棟C">
+        <area shape="rect" coords="307,146,432,193" href="kogiA.html" alt="講義棟A">
+        <area shape="rect" coords="549,145,696,196" href="kogiB.html" alt="講義棟B">
+        <area shape="rect" coords="549,94,685,145" href="kogiC.html" alt="講義棟C">
+        <area shape="rect" coords="421,84,429,98" href="kogiD.html" alt="講義棟D">
+        <area shape="rect" coords="546,84,558,98" href="kogiE.html" alt="講義棟E">
+        <area shape="rect" coords="321,102,433,136" href="kogijikken.html" alt="講義棟実験棟">
+        <area shape="rect" coords="357,556,640,712" href="kenkyujo.html" alt="研究所棟">
+        <area shape="rect" coords="640,433,779,524" href="honbuto.html" alt="本部棟">
+        <area shape="rect" coords="291,294,466,513" href="foodsfuu.html" alt="FOODS FUU">
+        <area shape="rect" coords="635,301,760,366" href="bijutsukan.html" alt="美術館">
+        <area shape="rect" coords="220,52,313,125" href="jikkentoA.html" alt="実験棟A">
+        <area shape="rect" coords="648,204,791,277" href="jikkentoB.html" alt="実験棟B">
+        <area shape="rect" coords="700,120,794,202" href="media.html" alt="メディアホール">
+        <area shape="rect" coords="359,53,432,86" href="cafe.html" alt="カフェテリア棟">
+        <area shape="rect" coords="467,27,511,71" href="katayanagikinen.html" alt="片柳記念ホール">
+        <area shape="rect" coords="87,23,202,92" href="taiikukan.html" alt="体育館">
+        <area shape="rect" coords="28,85,103,154" href="tennis.html" alt="テニスコート">
+        <area shape="rect" coords="630,560,652,620" href="hachioji.html" alt="八王子駅行き">
+        <area shape="rect" coords="445,218,467,291" href="hachiojinorth.html" alt="八王子みなみ野駅行き">
+        <area shape="rect" coords="809,240,896,381" href="churinjo.html" alt="駐輪場">
+    </map>
+        <!-- 出発点を決めるためのところ -->
+    <div id="area">
+        <div id="area_s">
+            <p>
+                <label for="area_s">出発点</label><br>
+                <select id="area_s" name="s-area">
+                    <option value="">出発点を選択してください</option>
+                    <option value="hachioji">八王子駅行き</option>
+                    <option value="hachiojinorth">八王子みなみ野駅行き</option>
+                    <option value="Churinjo">駐輪場</option>
+                </select>
+            </p>
+        </div>
+        <!-- 行き先を決めるところ -->
+        <div id="area_f">
+            <p>
+                <label for="area_f">行き先</label><br>
+                <select id="area_f" name="f-area">
+                    <option value="">行き先を選択してください</option>
+                    <option value="KenkyuA">研究棟A</option>
+                    <option value="KenkyuB">研究棟B</option>
+                    <option value="KenkyuC">研究棟C</option>
+                    <option value="KogiA">講義棟A</option>
+                    <option value="KogiB">講義棟B</option>
+                    <option value="KogiC">講義棟C</option>
+                    <option value="KogiD">講義棟D</option>
+                    <option value="KogiE">講義棟E</option>
+                    <option value="Kogijikken">講義実験棟</option>
+                    <option value="Toshokan">図書館棟</option>
+                    <option value="Kousei">厚生棟</option>
+                    <option value="Kenkyujo">研究所棟</option>
+                    <option value="Honbuto">本部棟</option>
+                    <option value="Foodsfuu">フーズフー</option>
+                    <option value="Bijutsukan">美術館</option>
+                    <option value="JikkentoA">実験棟A</option>
+                    <option value="JikkentoB">実験棟B</option>
+                    <option value="Media">メディアホール</option>
+                    <option value="Cafe">カフェテリア棟</option>
+                    <option value="Katayanagikinen">片柳記念ホール</option>
+                    <option value="taiikukan">体育館</option>
+                    <option value="Tennis">テニスコート</option>
+                    <option value="Rikujo">陸上競技場</option>
+                </select>
+            </p>
+        </div>
+    </div>
+    <div id="controls">
+        <button id="roll-dice">Roll Dice</button>
+        <button id="reset-game">Reset</button>
+        <img id="dice-image" src="dice1.png" alt="Dice" width="50">
+        <p id="dice-result">Dice: 0</p>
+    </div>
+        <script src="script.js"></script>
+        <!-- 今のページの初期状態に戻る -->
+        <button onclick="window.location.href=window.location.href"class="btn">戻る</button>
+    <script>
+        window.onload = function() {
+            imageMapResize(); // ページロード時に呼び出し
+        };
+        window.onresize = function() {
+            imageMapResize(); // ウィンドウサイズが変わったときに呼び出し
+        };
+    </script>
+        
+</body>
+</html>

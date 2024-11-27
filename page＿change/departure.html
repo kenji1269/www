@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="common.js" defer></script>
+  <title>出発点を選択</title>
+  <link rel="stylesheet" href="departure.css">
+</head>
+<body>
+    <form id="departureForm" action="destination.html" method="GET">
+        <label for="departure">出発点:</label>
+        <select id="departure" name="departure" required>
+      <option value="">選択してください</option>
+      <option value="start1">八王子駅行き</option>
+      <option value="start2">八王子みなみ野駅行き</option>
+      <option value="start3">駐輪場</option>
+    </select>
+    <div id="departure_info">
+      <p>出発点を選択してください。</p>
+    </div>
+    <button type="submit" class="next-button">次へ</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const departureData = {
+            start1: { number: 100, content: "八王子駅行きのイメージ", image: "images/八王子駅行.jpg", link: "info/hachioji.html" },
+            start2: { number: 200, content: "八王子南駅のイメージ", image: "images/八王子南の駅.jpg", link: "info/hachiojinorth.html" },
+            start3: { number: 300, content: "駐輪場のイメージ", image: "images/駐車場.jpg", link: "info/churinjo.html" },
+          };
+          setupDeparturePage(departureData);
+        });
+      </script>
+
+</body>
+</html>
